@@ -38,14 +38,14 @@ app: FastAPI = FastAPI(
     swagger_ui_parameters={'displayRequestDuration': True}
 )
 
-origins = ["*"]
+origins = ["http://localhost:3000"]
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
-    allow_headers=["*"],
+    # allow_headers=["*"],
 )
 
 app.include_router(prod_router)

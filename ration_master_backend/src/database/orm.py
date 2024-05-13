@@ -2,6 +2,7 @@ from sqlalchemy import SmallInteger, VARCHAR, UUID, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from src.database import BaseORM, engine
+from util import fill_db
 
 
 class ProductModel(BaseORM):
@@ -69,3 +70,4 @@ class RationModel(BaseORM):
 
 def create_db() -> None:
     BaseORM.metadata.create_all(engine)
+    fill_db('/sqlite_data/sqlite.db')

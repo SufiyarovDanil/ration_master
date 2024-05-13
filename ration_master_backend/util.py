@@ -1,16 +1,16 @@
 import sqlite3
 
 
-def fill_db() -> None:
-    connection = sqlite3.connect('./app.db')
+def fill_db(url: str) -> None:
+    connection = sqlite3.connect(url)
     cursor = connection.cursor()
 
     with  open('./res/init.sql', encoding='utf-8') as f:
         for cmd in f.read().split(';'):
-            cursor.execute(cmd)
+            try:
+                cursor.execute(cmd)
+            except Exception:
+                print('skip fill sql command')
 
     connection.commit()
     connection.close()
-
-
-fill_db()

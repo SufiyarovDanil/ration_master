@@ -1,0 +1,23 @@
+version: "3.7"
+services:
+  ration_master_backend:
+    container_name: rm_backend
+    build:
+      context: ./ration_master_backend/
+    volumes:
+      - sqlite_data:/sqlite_data/
+    environment:
+      - DATABASE_URL=sqlite:////sqlite_data/sqlite.db
+    ports:
+      - "8000:8000"
+  ration_master_frontend:
+    container_name: rm_frontend
+    build:
+      context: ./ration_master_frontend/
+    ports:
+      - "3000:3000"
+    depends_on:
+      - ration_master_backend
+      
+volumes:
+  sqlite_data:
